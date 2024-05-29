@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<meta name="viewport" content="initial-scale=1, maximum-scalable=yes">
+	<meta name="description" content="Online Spreadsheet Generator for Caleb University">
+	<meta name="keywords" content="Online Spreadsheet Generator,Caleb University Generator, Result database">
+	<meta name="author" content="Aderibigbe Ayomide Joy">
+	<title>Caleb University Community</title>
+	<link rel="stylesheet" type="text/css" href="{% static './css/studentregister.css' %}">
+</head>
+<body>
+	<nav>
+		<div>
+			<a href="index.html"><img src="{% static './img/caleb-logo-1.png' %}"></a>
+		</div>
+		<div>
+			<a href="https://www.admission.calebuniversity.edu.ng" target="_blank">Admission</a>
+			<a href="https://www.calebuniversity.edu.ng/courses" target="_blank">Courses</a>
+			<a href="https://www.calebuniversity.edu.ng/news/" target="_blank">News</a>
+			<a href="https://www.ums.calebuniversity.edu.ng" target="_blank">Portal</a>
+			<a href="https://www.calebuniversity.edu.ng/about-us/" target="_blank">About</a>
+			<a href="/logout" class="button">Sign Off</a>
+		</div>
+	</nav>
+	<div class="mainer">
+	</div>
+	<section class="main">
+		<div class="titlechat">
+		{% if is_search == True %}
+			<span class="searching_exit">
+					<h2>Find And Register Courses</h2>
+					<span class="spacex">
+						<h4>BACK</h4>
+						<a href="studentRegister"><img src="{% static './img/x-octagon.svg' %}"></a>
+					</span>
+			</span>
+		{% else %}
+			<h2>Find And Register Courses</h2>
+		{% endif %}
+			<form action="studentRegister" method="POST">
+				{% csrf_token %}
+				<img src="{% static './img/search.svg' %}">
+				<input type="text" name="search_course" placeholder="search for your course" >
+			</form>
+		</div>
+			{% if is_search == True %}
+				{% if No_Of_Results > 0 %}
+					{% for course in search_result %}
+						<div class="note">
+								<div>
+									<h3 class="nothover">
+											{{course.course_code}}
+									</h3>
+									<p><strong>Description: </strong> {{course.course_description|truncatewords:35}}</p>
+									<p><strong>Unit: </strong>{{course.course_unit}}</p>
+									<span class="elclasico_span">
+										<a href="{% url 'registerCourse' course.id %}" class="elclasico">View</a>
+										<a href="/studentRegister" class="elclasico2">Reload</a>
+									</span>
+								</div>
+						</div>
+					{% endfor %}
+				<span class="ked">
+				<h3>({{No_Of_Results}}) search results for ({{searched_course}})</h3>
+				</span>
+				{% elif No_Of_Results == 0 %}
+					<span class="ned">
+							<h1>No Courses were found for ({{searched_course}})</h1>
+						</span>
+				{% endif %}
+			{% else %}
+				<span class="ned">
+						<h1>Register For Your Courses To Get Your Info Added To The Recorder!</h1>
+				</span>
+			{% endif %}
+
+	</section>
+	<section class="sidebar">
+		<div class="navigation">
+			<div>
+				<h3>Navigations</h3>
+				<p>Explore this new world now!</p>
+			</div>
+			<div class="movoro">
+				<a href="/home"><img src="{% static './img/person-circle.svg' %}">Profile</a>
+				<a href="/book"><img src="{% static './img/house-fill.svg' %}">Library</a>
+				<a href="/chats"><img src="{% static './img/chat-dots.svg' %}">Chats</a>
+				<a href="/groups"><img src="{% static './img/house-fill.svg' %}">Groups</a>
+				<a href="/peers"><img src="{% static './img/plus-circle.svg' %}"> Peers</a>
+				<a href="/findpeers"><img src="{% static './img/person-plus-fill.svg' %}"> Find Peers</a>
+			</div>
+		</div>
+		<div class="banner">
+
+		</div>
+	</section>
+</body>
+</html>

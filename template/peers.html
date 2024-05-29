@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<meta name="viewport" content="initial-scale=1, maximum-scalable=yes">
+	<meta name="description" content="Online Spreadsheet Generator for Caleb University">
+	<meta name="keywords" content="Online Spreadsheet Generator,Caleb University Generator, Result database">
+	<meta name="author" content="Aderibigbe Ayomide Joy">
+	<title>Caleb University Community</title>
+	<link rel="stylesheet" type="text/css" href="{% static './css/peers.css' %}">
+</head>
+<body>
+	<nav>
+		<div>
+			<a href="index.html"><img src="{% static './img/caleb-logo-1.png' %}"></a>
+		</div>
+		<div>
+			<a href="https://www.admission.calebuniversity.edu.ng" target="_blank">Admission</a>
+			<a href="https://www.calebuniversity.edu.ng/courses" target="_blank">Courses</a>
+			<a href="https://www.calebuniversity.edu.ng/news/" target="_blank">News</a>
+			<a href="https://www.ums.calebuniversity.edu.ng" target="_blank">Portal</a>
+			<a href="https://www.calebuniversity.edu.ng/about-us/" target="_blank">About</a>
+			<a href="/logout" class="button">Sign Off</a>
+		</div>
+	</nav>
+	<div class="mainer">
+	</div>
+	<section class="main">
+		<div class="titlechat">
+		{% if is_search == True %}
+			<span class="searching_exit">
+					<h2>Peers</h2>
+					<span class="spacex">
+						<h4>BACK</h4>
+						<a href="peers"><img src="{% static './img/x-octagon.svg' %}"></a>
+					</span>
+			</span>
+		{% else %}
+			<h2>Peers</h2>
+		{% endif %}
+					<form action="peers" method="POST">
+						{% csrf_token %}
+						<img src="{% static './img/search.svg' %}">
+						<input type="text" name="search_friend" placeholder="Find a friend" >
+					</form>
+				</div>
+		{% if is_search == False %}
+			{% for friend in friend_List %}
+				<div class="note">
+					<a href="{% url 'viewprofile' friend.member_id %}">
+					{% if friend.member_picture == "none" %}
+						<img src="{% static './img/new_person.png' %}">
+					{% else %}
+						<img src={{friend.member_picture}}>
+					{% endif %}
+					</a>
+					<div>
+						<h3 class="nothover">
+							<a href="{% url 'viewprofile' friend.member_id %}">
+							{{ friend.member_name }}
+							</a>
+						</h3>
+						<span>
+							<a href="{% url 'viewprofile' friend.member_id %}"><img src="{% static './img/person-circle.svg' %}" class="note_span"></a>
+							<a href="{% url 'startchat' friend.member_id %}"><img src="{% static './img/chat-dots.svg' %}" class="note_span"></a>
+							<a href="{% url 'deletefriend' friend.member_id %}"><img src="{% static './img/x-octagon.svg' %}" class="note_span"></a>
+						</span>
+					</div>
+				</div>
+		{% endfor %}
+		{% if No_Of_Results == 0 %}
+			<span class="ned">
+					<h1>You are currently not connected with any of your peers, not to worry!</h1>
+					<a href="/findpeers" class="meds">Add Friends</a>
+			</span>
+		{% endif %}
+		{% else %}
+		{% if No_Of_Results > 0 %}
+			{% for friend in friend_search %}
+				<div class="note">
+					<a href="{% url 'viewprofile' friend.member_id %}">
+					{% if friend.member_picture == "none" %}
+						<img src="{% static './img/new_person.png' %}">
+					{% else %}
+						<img src={{friend.member_picture}}>
+					{% endif %}
+					</a>
+					<div>
+						<h3 class="nothover">
+							<a href="{% url 'viewprofile' friend.member_id %}">
+							{{ friend.member_name }}
+							</a>
+						</h3>
+						<span>
+							<a href="{% url 'viewprofile' friend.member_id %}"><img src="{% static './img/person-circle.svg' %}" class="note_span"></a>
+							<a href="{% url 'startchat' friend.member_id %}"><img src="{% static './img/chat-dots.svg' %}" class="note_span"></a>
+							<a href="{% url 'deletefriend' friend.member_id %}"><img src="{% static './img/x-octagon.svg' %}" class="note_span"></a>
+						</span>
+					</div>
+				</div>
+		{% endfor %}
+				<span class="ked">
+				<h3>({{No_Of_Results}}) search results for {{searched_friend}}</h3>
+				</span>
+		{% elif No_Of_Results == 0 %}
+			<span class="ned">
+					<h1>No friends were found for ({{searched_friend}})</h1>
+				</span>
+		{% endif %}
+		{% endif %}
+	</section>
+	<section class="sidebar">
+		<div class="navigation">
+			<div>
+				<h3>Navigations</h3>
+				<p>Explore this new world now!</p>
+			</div>
+			<div class="movoro">
+				<a href="/home"><img src="{% static './img/person-circle.svg' %}">Profile</a>
+				<a href="/book"><img src="{% static './img/house-fill.svg' %}">Library</a>
+				<a href="/chats"><img src="{% static './img/chat-dots.svg' %}">Chats</a>
+				<a href="/groups"><img src="{% static './img/house-fill.svg' %}">Groups</a>
+				<a href="/peers"><img src="{% static './img/plus-circle.svg' %}"> Peers</a>
+				<a href="/findpeers"><img src="{% static './img/person-plus-fill.svg' %}"> Find Peers</a>
+			</div>
+		</div>
+		<div class="banner">
+
+		</div>
+	</section>
+</body>
+</html>

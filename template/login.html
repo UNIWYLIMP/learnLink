@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<meta name="viewport" content="initial-scale=1, maximum-scalable=yes">
+	<meta name="description" content="Online Spreadsheet Generator for Caleb University">
+	<meta name="keywords" content="Online Spreadsheet Generator,Caleb University Generator, Result database">
+	<meta name="author" content="Aderibigbe Ayomide Joy">
+	<title>Caleb University Community</title>
+	<link rel="stylesheet" type="text/css" href="{% static './css/login.css' %}">
+	<script rel="stylesheet" type="text/javascript" src="{% static './js/jquery-1.9.1.min.js' %}"></script>
+</head>
+<body>
+	<nav>
+		<div>
+			<a href="/"><img src="{% static './img/caleb-logo-1.png' %}"></a>
+		</div>
+		<div class="nav_new">
+			<a href="https://www.admission.calebuniversity.edu.ng" target="_blank">Admission</a>
+			<a href="https://www.calebuniversity.edu.ng/courses" target="_blank">Courses</a>
+			<a href="https://www.calebuniversity.edu.ng/news/" target="_blank">News</a>
+			<a href="https://www.ums.calebuniversity.edu.ng" target="_blank">Portal</a>
+			<a href="https://www.calebuniversity.edu.ng/about-us/" target="_blank">About</a>
+			<a href="https://www.calebuniversity.edu.ng/" target="_blank" class="button">GET STARTED</a>
+		</div>
+		<div class="nav_small">
+			<img src="{% static './img/list.svg' %}" class="nav_small_img">
+			<a href="https://www.calebuniversity.edu.ng/" target="_blank" class="button">GET STARTED</a>
+		</div>
+	</nav>
+	<div class="nav_old">
+			<a href="https://www.admission.calebuniversity.edu.ng" target="_blank">Admission</a>
+			<a href="https://www.calebuniversity.edu.ng/courses" target="_blank">Courses</a>
+			<a href="https://www.calebuniversity.edu.ng/news/" target="_blank">News</a>
+			<a href="https://www.ums.calebuniversity.edu.ng" target="_blank">Portal</a>
+			<a href="https://www.calebuniversity.edu.ng/about-us/" target="_blank">About</a>
+			<a href="https://www.calebuniversity.edu.ng/" target="_blank" class="big_west">GET STARTED</a>
+	</div>
+	<section class="main">
+		<div class="form_class">
+			{% for message in messages %}
+			<h5 class="greenie" style="padding-bottom: 15px;">{{message}}!</h5>
+			{% endfor %}
+			<h3>WELCOME BACK!</h3>
+			<p>Join and get useful infos, tips and handouts!</p>
+			<form method="POST" action="login">
+				{% csrf_token %}
+				<input type="email" name="email" placeholder="Email:">
+				<input type="password" name="password" placeholder="Password: ">
+				<button type="submit">LOGIN</button>
+			</form>
+			<a href="/signup">New To Caleb Info? <span class="greenie">Signup!</span></a>
+
+		</div>
+		<img src="{% static './img/Caleblogo.png' %}" class="mainbackground">
+	</section>
+	<h3 class="support_message">Your Device Screen Size Is Not Supported. Try a larger screen!</h3>
+	<script type="text/javascript">
+		let x_counter = 0;
+		$('.nav_small_img').click(function(e){
+			if (x_counter == 0)
+			{
+				$('.nav_small_img').attr("src", "./static/img/x.svg");
+				$('.nav_old').css("display", "flex");
+				x_counter = 1;
+			}
+
+			else
+			{
+				$('.nav_small_img').attr("src", "./static/img/list.svg");
+				$('.nav_old').css("display", "none");
+				x_counter = 0;
+			}
+		});
+	</script>
+</body>
+</html>

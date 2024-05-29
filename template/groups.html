@@ -1,0 +1,147 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<meta name="viewport" content="initial-scale=1, maximum-scalable=yes">
+	<meta name="description" content="Online Spreadsheet Generator for Caleb University">
+	<meta name="keywords" content="Online Spreadsheet Generator,Caleb University Generator, Result database">
+	<meta name="author" content="Aderibigbe Ayomide Joy">
+	<title>Caleb University Community</title>
+	<link rel="stylesheet" type="text/css" href="{% static './css/groups.css' %}">
+	<script rel="stylesheet" type="text/javascript" src="{% static './js/jquery-1.9.1.min.js' %}"></script>
+</head>
+<body>
+	<nav>
+		<div>
+			<a href="index.html"><img src="{% static './img/caleb-logo-1.png' %}"></a>
+		</div>
+		<div>
+			<a href="https://www.admission.calebuniversity.edu.ng" target="_blank">Admission</a>
+			<a href="https://www.calebuniversity.edu.ng/courses" target="_blank">Courses</a>
+			<a href="https://www.calebuniversity.edu.ng/news/" target="_blank">News</a>
+			<a href="https://www.ums.calebuniversity.edu.ng" target="_blank">Portal</a>
+			<a href="https://www.calebuniversity.edu.ng/about-us/" target="_blank">About</a>
+			<a href="/logout" class="button">Sign Off</a>
+		</div>
+	</nav>
+	<div class="mainer">
+	</div>
+	<section class="main" id="main">
+		<div class="titlechat">
+				<span class="top_title">
+					<h2>Groups</h2>
+					<a href="#" id="edit">Create Group</a>
+				</span>
+					<form>
+						<img src="{% static './img/search.svg' %}">
+						<input type="text" name="" placeholder="Search groups" >
+					</form>
+				</div>
+		<div class="outside"></div>
+	</section>
+	<section class="edit_form" id="xmain">
+		<form action="makegroup" method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			<span class="edit_form_title">
+			<h1>Create New Group!</h1>
+			<a id="xedit"><img src="{% static './img/x-octagon.svg' %}"></a>
+			</span>
+			<input type="text" name="group_name" required placeholder="Group Name: ">
+			<textarea name="group_description" required placeholder="Enter Group description: "></textarea>
+			<label for="inputTag" class="labelone">
+				Select Picture <br/>
+				<img src="{% static './img/photo-camera.png' %}" class="imageage">
+				<input id="inputTag" class="inputone" required name="file" type="file" accept="image/*"/>
+				<br/>
+				<h4 id="imageName"></h4>
+			</label>
+			<button type="submit">Create</button>
+		</form>
+	</section>
+	<section class="sidebar" id="sidebar">
+		<div class="navigation">
+			<div>
+				<h3>Navigations</h3>
+				<p>Explore this new world now!</p>
+			</div>
+			<div class="movoro">
+				<a href="/home"><img src="{% static './img/person-circle.svg' %}">Profile</a>
+				<a href="/book"><img src="{% static './img/house-fill.svg' %}">Library</a>
+				<a href="/chats"><img src="{% static './img/chat-dots.svg' %}">Chats</a>
+				<a href="/groups"><img src="{% static './img/house-fill.svg' %}">Groups</a>
+				<a href="/peers"><img src="{% static './img/plus-circle.svg' %}"> Peers</a>
+				<a href="/findpeers"><img src="{% static './img/person-plus-fill.svg' %}"> Find Peers</a>
+			</div>
+		</div>
+		<div class="banner">
+		</div>
+	</section>
+	<script type="text/javascript">
+			var edit = document.getElementById("edit");
+			var sidebar = document.getElementById("sidebar");
+			var main = document.getElementById("main");
+			var xmain = document.getElementById("xmain");
+
+			edit.addEventListener("click", function(event){
+				xmain.style = "display: flex;"
+				main.style = "position: fixed; opacity: 0.40; z-index: 1;"
+				sidebar.style = "position: fixed; opacity: 0.70; z-index: 1;"
+			});
+
+			var xedit = document.getElementById("xedit");
+
+			xedit.addEventListener("click", function(event){
+				xmain.style = "display: none;"
+				main.style = "display: flex; flex-direction: column;"
+				sidebar.style = "display: flex; flex-direction: column;"
+			});
+
+		$(document).ready(function(){
+			setInterval(function(){
+			$.ajax({
+				type: 'GET',
+				url: "{% url 'reloadgroup' %}",
+				data: {},
+				success: function(response)
+				{
+					$(".outside").empty();
+					$(".outside").css("width", "100%");
+					var x = response.group_length;
+					var group_info = response.super_group_info;
+					var y = 0;
+					while(y < x)
+					{
+						if( group_info[y].group_picture == "none")
+						{
+						   group_profile_img = "{% static './img/person.png' %}"
+						}
+
+						else
+						{
+							group_profile_img = group_info[y].group_picture
+						}
+						var x_men = response.super_group_info[y].id;
+						$(".outside").append("<div><a href=\"/privategroup/" + response.all_list_id[y] + "\"><div class='note'><img src=" + group_profile_img + "><div><h3>" + group_info[y].group_name + "</h3><span><p>" + group_info[y].last_message + "</p><p>" + group_info[y].last_message_time + "</p></span></div></div></a></div>");
+						console.log(response.super_group_info[y].id);
+						console.log("<a href=\"{% url 'privategroup' " + response.all_list_id[y] + " %\}\"");
+						y++;
+					}
+
+					if(x == 0)
+					{
+						$(".outside").append("<span class='ned'><h1>You are currently not on a group, check your invitations and accept any pending invite!</h1></span>");
+					}
+
+					else
+					{
+						$(".outside").append("<span class='ked'><h3>(" + x + ") groups found</h3></span>");
+					}
+				}
+			})
+			}, 500);
+		})
+	</script>
+</body>
+</html>

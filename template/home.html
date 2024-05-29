@@ -1,0 +1,285 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<meta name="viewport" content="initial-scale=1, maximum-scalable=yes">
+	<meta name="description" content="Online Spreadsheet Generator for Caleb University">
+	<meta name="keywords" content="Online Spreadsheet Generator,Caleb University Generator, Result database">
+	<meta name="author" content="Aderibigbe Ayomide Joy">
+	<title>Caleb University Community</title>
+	<link rel="stylesheet" type="text/css" href="{% static './css/home.css' %}">
+	<script rel="stylesheet" type="text/javascript" src="{% static './js/jquery-1.9.1.min.js' %}"></script>
+</head>
+<body>
+	<nav>
+		<div>
+			<a href="index.html"><img src="{% static './img/caleb-logo-1.png' %}"></a>
+		</div>
+		<div>
+			<a href="https://www.admission.calebuniversity.edu.ng" target="_blank">Admission</a>
+			<a href="https://www.calebuniversity.edu.ng/courses" target="_blank">Courses</a>
+			<a href="https://www.calebuniversity.edu.ng/news/" target="_blank">News</a>
+			<a href="https://www.ums.calebuniversity.edu.ng" target="_blank">Portal</a>
+			<a href="https://www.calebuniversity.edu.ng/about-us/" target="_blank">About</a>
+			<a href="/logout" class="button">Sign Off</a>
+		</div>
+	</nav>
+	<div class="mainer">
+
+	</div>
+	<section id="main" class="main">
+		<div class="firstsec">
+			<div class="profpic">
+				{% if new_profile_item.profile_background_picture == "none" %}
+				<img src="{% static './img/person.png' %}" class="onep">
+				{% else %}
+				<img src={{new_profile_item.profile_background_picture}} class="onep">
+				{% endif %}
+				{% if new_profile_item.profile_picture == "none" %}
+				<img src="{% static './img/new_person.png' %}" class="twop">
+				{% else %}
+				<img src={{new_profile_item.profile_picture}} class="twop">
+				{% endif %}
+				<form class="threep" id="three_form" method="POST" enctype="multipart/form-data" action="upload_image_background">
+					{% csrf_token %}
+					<label for="background_img">
+						<input type="file" accept="image/*" name="image_background" id="background_img">
+						<img src="{% static './img/photo-camera.png' %}">
+					</label>
+				</form>
+			</div>
+			<div class="proftit">
+				<h3>{{Profile.name}}</h3>
+				<p>{{Profile.status}} at Caleb University</p>
+				<img src="{% static './img/pencil-square.svg' %}" class="bititi" id="edit">
+			</div>
+			<div class="profhans">
+				<h3>Primary Info</h3>
+				<div>
+					{% if Profile.status == 'student' %}
+					<span class="flamejaws"><img src="{% static './img/geo-alt-fill.svg' %}"> {{Profile.level}}</span>
+					{% else %}
+					<span class="flamejaws"><img src="{% static './img/geo-alt-fill.svg' %}"> {{Profile.status}}</span>
+					{% endif %}
+					<span class="flamejaws"><img src="{% static './img/person-fill.svg' %}"> {{Profile.gender}}</span>
+					<span class="flamejaws"><img src="{% static './img/envelope-plus.svg' %}"> {{Profile.email}}</span>
+				</div>
+				<div>
+					{% if Profile.status == 'student' %}
+					<span class="flamejaws"><img src="{% static './img/phone.svg' %}"> {{Profile.matric}}</span>
+					{% else %}
+					<span class="flamejaws"><img src="{% static './img/phone.svg' %}"> {{Profile.matric}}</span>
+					{% endif %}
+					<span class="flamejaws"><img src="{% static './img/calendar2-date.svg' %}"> {{Profile.date_of_birth}}</span>
+				</div>
+			</div>
+		</div>
+		<div class="thirdsec">
+			<span class="blight">
+				<h3>About</h3>
+				<div class="rogo">
+					<a id="pedit"><img src="{% static './img/pencil-square.svg' %}" class="xbititi"></a>
+				</div>
+			</span>
+			{% if bioLength > 1 %}
+			<p>{{Profile.bio}}</p>
+			{% else %}
+				<span class="ked">
+				<h3><span class="greenie" style="padding: 10px 30%; text-align: center;">No Bio Uploaded Yet!</span></h3>
+				</span>
+			{% endif %}
+		</div>
+		<div class="thirdsec">
+			<span class="blight">
+				<h3>Caleb Grading System!</h3>
+				<div class="rogo">
+				</div>
+			</span>
+			<div class="eddy"></div>
+			<h4><span class="greenie">Honours</span></h4>
+			<span class="spancious">
+				<ul>
+					<li>First Class Honours: 5.00-4.50</li>
+					<li>Second Class Honours(Lower): 3.50-2.50.</li>
+
+				</ul>
+				<ul>
+					<li>Third Class Honours: 2.50-2.00.</li>
+					<li>Second Class Honours(Upper): 4.50-3.50</li>
+				</ul>
+			</span>
+
+			<div class="eddy"></div>
+			<h4><span class="greenie">Point Gradings</span></h4>
+			<span class="spanciousx">
+				<ul>
+					<li>A: 100%-70%</li>
+					<li>E: 44%-40%</li>
+				</ul>
+				<ul>
+					<li>C: 59%-50%</li>
+					<li>F: 39%-0%</li>
+				</ul>
+				<ul>
+					<li>B: 69%-60%</li>
+					<li>D: 49%-45%</li>
+				</ul>
+			</span>
+		</div>
+	</section>
+	<section id="sidebar" class="sidebar">
+		<div class="navigation">
+			<div>
+				<h3>Navigations</h3>
+				<p>Explore this new world now!</p>
+			</div>
+			<div class="movoro">
+				<a href="/home"><img src="{% static './img/person-circle.svg' %}">Profile</a>
+				<a href="/book"><img src="{% static './img/house-fill.svg' %}">Library</a>
+				<a href="/chats"><img src="{% static './img/chat-dots.svg' %}">Chats</a>
+				<a href="/groups"><img src="{% static './img/house-fill.svg' %}">Groups</a>
+				<a href="/peers"><img src="{% static './img/plus-circle.svg' %}"> Peers</a>
+				<a href="/findpeers"><img src="{% static './img/person-plus-fill.svg' %}"> Find Peers</a>
+			</div>
+		</div>
+		<div class="banner">
+
+		</div>
+	</section>
+	<!--
+		Lecture and student Register
+	-->
+	{% if Profile.status == 'student' %}
+	<a href="/studentRegister" class="news3">
+	<img src="{% static './img/grid-box.svg' %}">
+	</a>
+	{% else %}
+	<a href="/lecturerRegister" class="news3">
+	<img src="{% static './img/grid-box.svg' %}">
+	</a>
+	{% endif %}
+	<!--
+		Caleb News
+	-->
+	<a href="/calebnews" class="news2">
+	<img src="{% static './img/card-text.svg' %}">
+	</a>
+	<!--
+		Busier System
+	-->
+	{% if Profile.status == 'student' %}
+	<a href="/busierUpload" class="news">
+	<img src="{% static './img/stickies-fill.svg' %}">
+	</a>
+	<!--
+		Spreadsheet Generator
+	-->
+	{% else %}
+	<a href="/spreadsheet" class="news">
+	<img src="{% static './img/stickies-fill.svg' %}">
+	</a>
+	{% endif %}
+	<section id="xmain" class="xmain">
+		<span class="spanmain">
+			<a id="xedit"><img src="{% static './img/x-octagon.svg' %}" ></a>
+			<h1>Change Your Info <span class="reddie">{{UserName}}!</span></h1>
+			<form method="POST" action="editProfile" enctype="multipart/form-data">
+				{% csrf_token %}
+				<div>
+					<div class="divone">
+					{% if new_profile_item.profile_picture == "none" %}
+						<img src="{% static './img/new_person.png' %}" id="prof_img" style="min-width: 250px; min-height: 250px; border-radius:305px; object-fit: cover; object-position: center;box-shadow: rgba(11, 11, 11, 1.0) 1px 1px 3px; border: 6px solid black">
+					{% else %}
+						<img src="{{new_profile_item.profile_picture}}" id="prof_img" style="min-width: 250px; min-height: 250px; border-radius:305px; object-fit: cover; object-position: center;box-shadow: rgba(11, 11, 11, 1.0) 1px 1px 3px; border: 6px solid black">
+					{% endif %}
+						<label for="inputTag" class="labelone">
+							<img src="{% static './img/photo-camera.png' %}" class="imageage">
+							<input id="inputTag" class="inputone" name="profile_pic" type="file" accept="image/*"/>
+						</label>
+					</div>
+				</div>
+			    <div class="masixo">
+			    	<div class="dob">
+				    	<label>Date Of Birth: </label>
+				    	<br>
+				    	<input type="date" name="DOB">
+			    	</div>
+			    	<div class="gender">
+				    	<label>Gender: </label>
+				    	<br>
+				    	<select name="Gender">
+				    		<option value="male">Male</option>
+							<option value="female">Female</option>
+				    	</select>
+			    	</div>
+			    </div>
+				{% if Profile.status == 'student' %}
+			    <label>Matric No:</label>
+			    <input type="text" name="matricNumber" placeholder="{{Profile.matric}}">
+				<label>Department:</label>
+			    <input type="text" name="department" placeholder="{{Profile.department}}">
+				<label>Level: </label>
+				<select name="level">
+					<option value="100">100 Level</option>
+					<option value="200">200 Level</option>
+					<option value="300">300 Level</option>
+					<option value="400">400 Level</option>
+				</select>
+				{% else %}
+				<label>Telephone Number:</label>
+			    <input type="tel" name="telephoneNumber" placeholder="Ex: (+234) 708-563-0016 ">
+				{% endif %}
+				<label>Bio: </label>
+				<textarea name="bio" placeholder="tell us about yourself..."></textarea>
+				<button type="submit">Submit</button>
+			</form>
+			</span>
+	</section>
+	<script type="text/javascript">
+		let input_x = document.getElementById("inputTag");
+	    let image_profile_x = document.getElementById("prof_img");
+
+		input_x.addEventListener("change", (event)=>{
+	        image_profile_x.src = URL.createObjectURL(event.target.files[0]);
+	        image_profile_x.style = "min-width: 250px; min-height: 250px; border-radius:305px; object-fit: cover; object-position: top; box-shadow: rgba(11, 11, 11, 1.0) 0px 0px 6px;  border: 6px solid black";
+	    });
+
+		let input = document.getElementById("background_img");
+	    let image_profile = document.getElementById("onep");
+
+	    input.addEventListener("change", (event)=>{
+	         //image_profile.src = URL.createObjectURL(event.target.files[0]);
+	         let form = document.getElementById("three_form");
+	         form.submit();
+	         });
+
+		var edit = document.getElementById("edit");
+		var pedit = document.getElementById("pedit");
+		var sidebar = document.getElementById("sidebar");
+	    var main = document.getElementById("main");
+		var xmain = document.getElementById("xmain");
+
+		edit.addEventListener("click", function(event){
+			xmain.style = "display: flex;"
+			main.style = "position: fixed; opacity: 0.40; z-index: 1;"
+			sidebar.style = "position: fixed; opacity: 0.70; z-index: 1;"
+		});
+
+		pedit.addEventListener("click", function(event){
+			xmain.style = "display: flex;"
+			main.style = "position: fixed; opacity: 0.40; z-index: 1;"
+			sidebar.style = "position: fixed; opacity: 0.70; z-index: 1;"
+		});
+
+		var xedit = document.getElementById("xedit");
+
+		xedit.addEventListener("click", function(event){
+			xmain.style = "display: none;"
+			main.style = "display: flex; flex-direction: column;"
+			sidebar.style = "display: flex; flex-direction: column;"
+		});
+	</script>
+</body>
+</html>

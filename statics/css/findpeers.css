@@ -1,0 +1,662 @@
+* 
+{
+	margin: 0;
+	padding: 0;
+	overflow-y: visible;
+	box-sizing: border-box;
+    transition: all 0.6s ease-in-out;
+} 
+
+:root{
+    --primary-shade: #930000;
+    --gray-white: #C3c3c3;
+    --secondary-color: #Fbb040;
+    --light-color: #fff;
+    --dark-color: #000;
+    --bright-shade: green;
+}
+
+body{
+   font-family: 'Montserrat', sans-serif;
+   font-size: 12px;
+   background-position: center;
+   background: #fafaf9; /*#C3c3c3;*/
+   background-attachment: fixed;
+   background: url('../img/nediox.png');
+}
+
+
+@font-face
+{
+    font-family: "Montserrat-regular-thin";
+    src: url(../fonts/Montserrat-medium.ttf) format('woff2');
+}
+
+@font-face
+{
+	font-family: "Montserrat-bold";
+	src: url(../fonts/Montserrat-ExtraBold.ttf) format('woff2');
+}
+
+@font-face
+{
+	font-family: "Montserrat";
+	src: url(../fonts/Montserrat-Regular.ttf) format('woff2');
+}
+
+@font-face
+{
+    font-family: "Montserrat-Medium";
+    src: url(../fonts/Montserrat-Medium.ttf) format('woff2');
+}
+
+@font-face
+{
+	font-family: "Montserrat-regular-bold";
+	src: url(../fonts/Montserrat-SemiBold.ttf) format('woff2');
+}
+
+@font-face
+{
+    font-family: "Sunata";
+    src: url(../fonts/Montserrat-light.ttf) format('woff2');
+}
+
+/* Global Styles */
+ul
+{
+    list-style: none;
+}
+
+a
+{
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--dark-color);
+}
+
+
+a:hover
+{
+    color: yellowgreen;
+}
+
+img
+{
+    width: 100%;
+}
+.greenie
+{
+    color: green;
+}
+/***
+ * Global End 
+ * 
+ * Section Stylng Starts
+ * 
+ ***/
+
+nav
+{
+    height: 11.5vh;
+    width: 100%;
+    margin: auto;
+    padding: 0px 7.5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    background: white;
+    box-shadow: rgba(11, 10, 10, 1.0) 1px 1px 2px;
+    position: fixed;
+    z-index: 7;
+}
+
+nav img
+{
+    max-height: 40px;
+    width: auto;
+}
+
+nav a 
+{
+    margin: 0px 20px;
+    font-family: 'Montserrat-Medium';
+}
+.button
+{
+    padding: 10px 20px;
+    background: green;
+    color: var(--light-color);
+    font-family: 'Montserrat-regular-bold';
+}
+
+nav div:nth-child(1)
+{
+    width: 40%;
+}
+
+nav div:nth-child(2)
+{
+    width: 60%;
+    text-align: right;
+}
+
+.main 
+{
+    height: auto;
+    width: 50%;
+    margin-left: 36%;
+    margin-top: 0vh;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+}
+
+
+.invitation 
+{
+    background: var(--light-color);
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    box-shadow: rgba(11, 10, 10, 1.0) 1px 1px 2px;
+    border: 1px solid #eee;
+}
+
+.invite
+{
+    height: 40px;
+    width: 100%;
+    padding: 0px 20px;
+    display: flex;
+    border-bottom: 1px solid #eee;
+    flex-direction: row;
+    align-items: center;
+}
+
+.invite form
+{
+    border: none;
+    background: #eee;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    width: 40%;
+    height: 25px;
+    box-shadow: 0 0 1.5px black;
+}
+
+.invite form:focus
+{
+    box-shadow: 0 0 7px green;
+}
+.invite form img
+{
+    width: 15px;
+    height: 15px;
+    object-fit: cover;
+    margin: 10px;
+}
+
+.invite input
+{
+    width: 70.5%;
+    padding: 2px 0px;
+    border:none;
+    background: none;
+}
+
+.invite input:focus
+{
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.invite p:nth-child(1)
+{
+    width: 30%;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+}
+
+.invite p:nth-child(3)
+{
+    width: 30%;
+    text-align: right;
+    margin: 0;
+    padding: 0;
+}
+
+.invite1
+{
+    height: 90px;
+    width: 100%;
+    padding: 0px 20px;
+    display: flex;
+    border-bottom: 1px solid #eee;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.invite1 img
+{
+    height: 55px;
+    width: 55px;
+    border-radius: 50px;
+    object-fit: cover;
+    margin: 0;
+}
+
+.invitesub
+{
+    height: auto;
+    width: auto;
+    padding: 0px 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.invitesub h3
+{
+    margin: 0;
+    padding: 0;
+    font-size: 12.5px;
+}
+
+.invitesub p:nth-child(2)
+{
+    margin: 0;
+    padding: 2.5px 0px;
+    font-size: 9.5px;
+}
+.invitesub p:nth-child(3)
+{
+    margin: 0;
+    padding: 0.5px 0px;
+    font-size: 9.5px;
+}
+.invitesub div
+{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 5px 0px;
+}
+
+.invitesub div a:nth-child(1)
+{
+    padding: 4.5px 12.5px;
+    background: var(--bright-shade);
+    color: var(--light-color);
+    border-radius: 5.5px;
+    margin-right: 4px;
+    font-size: 11px;
+}
+
+.invitesub div a:nth-child(2)
+{
+    padding: 4.5px 12.5px;
+    background: #03b2f2;
+    color: black;
+    border-radius: 5.5px;
+    color: var(--light-color);
+    font-size: 11px;
+}
+
+.addppl
+{
+    height: auto;
+    width: 100%;
+    padding: 20px 10px;
+    display: flex;
+    background: var(--light-color);
+    border-top: 1px solid #eee;
+    flex-direction: column;
+    margin-top: 5px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    box-shadow: rgba(11, 10, 10, 1.0) 1px 1px 2px;
+}
+
+.addtitle
+{
+    height: 20px;
+    width: 100%;
+    padding: 0px 20px 15px;
+    display: flex;
+    border-bottom: 1px solid #eee;
+    flex-direction: row;
+    align-items: center;
+    font-size: 14.5px;
+}
+
+.addrow
+{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+}
+
+.addsingle
+{
+    display: flex;
+    flex-direction: column;
+    height: 239px;
+    width: 259px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #eee;
+    padding: 5px 5px;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+
+.addsingle img
+{
+    height: 75px;
+    width: 75px;
+    border-radius: 75px;
+    object-fit: cover;
+    margin: 7.5px;
+}
+
+.addsingle h4
+{
+    text-align: center;
+}
+.addsingle p:nth-child(4)
+{
+    margin: 0;
+    padding: 0;
+    font-size: 9.5px;
+    text-align: center;
+}
+
+.addsingle p:nth-child(3)
+{
+    margin: 0;
+    padding: 2px 5px 10px;
+    font-size: 10.5px;
+    text-align: center;
+}
+
+.addsingle div
+{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 0px;
+}
+
+.addsingle div a
+{
+    padding: 7.5px 15.5px;
+    border: 1px solid var(--bright-shade);
+    background: var(--light-color);
+    color: var(--bright-shade);
+    border-radius: 15.5px;
+    margin: 10px;
+    font-size: 9px;
+}
+
+.mainer
+{
+    height: 15vh;
+}
+
+.sidebar
+{
+    width: 20%;
+    height: 80%;
+    background: white;
+    position: fixed;
+    top: 15vh;
+    left: 15%;
+}
+
+.navigation
+{
+    width: 100%;
+    height: 400px;
+    background: var(--light-color);
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    box-shadow: rgba(11, 10, 10, 1.0) 1px 1px 2px;
+    margin-bottom: 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.navigation div:nth-child(1)
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+    width: 100%;
+    box-shadow: rgba(11, 11, 11, 1.0) -0.1px 0px 1px;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    padding: 5px 0px;
+}
+
+.navigation div:nth-child(1) h3
+{
+    text-align: center;
+    margin: 0;
+    padding: 5px 0px;
+    font-family: 'Montserrat-regular-thin';
+}
+
+.navigation div:nth-child(1) p
+{
+    text-align: center;
+    font-family: 'Montserrat-regular-thin';
+    opacity: 0.6;
+    margin: 0;
+    padding: 0;
+}
+
+.navigation div:nth-child(2)
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: center;
+    flex: 3;
+    width: 100%;
+    box-shadow: rgba(11, 11, 11, 1.0) -0.1px 0px 1px;
+}
+
+.navigation div:nth-child(2) a 
+{
+
+    font-family: 'Montserrat-regular-bold';
+    color: var(--dark-color);
+    padding: 5% 20px;
+    display: flex;
+    align-items: center;
+}
+
+.navigation div:nth-child(2) img
+{
+    height: 15.5px;
+    width: 15.5px;
+    object-fit: cover;
+    margin: 5px;
+}
+
+.ked
+{
+    height: 15vh;
+    width: 100%;
+    padding: 0px 30px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.viewallrequest
+{
+    width: 100%;
+    min-height: 100%;
+    background-color: none;
+    border-radius: 15px;
+    position: absolute;
+    z-index: 5;
+    top: 10%;
+    left: 0%;
+    display: none;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.friend_request_box
+{
+    min-height: 60vh;
+    width: 45%;
+    border-radius: 15px;
+    margin-top: 5vh;
+    padding: 10px 0px;
+    box-shadow: 0 0 7px green;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.invitex
+{
+    height: 40px;
+    width: 100%;
+    padding: 0px 20px;
+    display: flex;
+    border-bottom: 1px solid #eee;
+    flex-direction: row;
+    align-items: center;
+}
+
+.invitex p:nth-child(1)
+{
+    width: 50%;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+}
+
+.invitex p:nth-child(2)
+{
+    width: 50%;
+    text-align: right;
+    margin: 0;
+    padding: 0;
+}
+
+
+.ned
+{
+    text-align: center;
+    padding: 0px 25px;
+    height: 65vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ked
+{
+    height: 10vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.invitationx
+{
+    background: var(--light-color);
+    min-height: 80vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    box-shadow: rgba(11, 10, 10, 1.0) 1px 1px 2px;
+    border: 1px solid #eee;
+}
+
+.invitesubx
+{
+    height: auto;
+    width: auto;
+    padding: 0px 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.invitesubx h3
+{
+    margin: 0;
+    padding: 0;
+    font-size: 12.5px;
+}
+
+.invitesubx p:nth-child(2)
+{
+    margin: 0;
+    padding: 2.5px 0px;
+    font-size: 9.5px;
+}
+
+.invitesubx p:nth-child(3)
+{
+    margin: 0;
+    padding: 0.5px 0px;
+    font-size: 9.5px;
+}
+
+.invitesubx div
+{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 5px 0px;
+}
+
+.invitesubx div a:nth-child(1)
+{
+    padding: 4.5px 12.5px;
+    background: var(--light-color);
+    border: 1px solid green;
+    color: var(--bright-shade);
+    border-radius: 5.5px;
+    margin-right: 4px;
+    font-size: 11px;
+}
+
+.banner
+{
+    border: 2px solid green;
+}

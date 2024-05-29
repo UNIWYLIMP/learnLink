@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<meta name="viewport" content="initial-scale=1, maximum-scalable=yes">
+	<meta name="description" content="Online Spreadsheet Generator for Caleb University">
+	<meta name="keywords" content="Online Spreadsheet Generator,Caleb University Generator, Result database">
+	<meta name="author" content="Aderibigbe Ayomide Joy">
+	<title>Caleb University Community</title>
+	<link rel="stylesheet" type="text/css" href="{% static './css/busierlogin.css' %}">
+</head>
+<body>
+	<nav>
+		<div>
+			<a href="/"><img src="{% static './img/caleb-logo-1.png' %}"></a>
+		</div>
+		<div>
+			<a href="https://www.admission.calebuniversity.edu.ng" target="_blank">Admission</a>
+			<a href="https://www.calebuniversity.edu.ng/courses" target="_blank">Courses</a>
+			<a href="https://www.calebuniversity.edu.ng/news/" target="_blank">News</a>
+			<a href="https://www.ums.calebuniversity.edu.ng" target="_blank">Portal</a>
+			<a href="https://www.calebuniversity.edu.ng/about-us/" target="_blank">About</a>
+			<a href="https://www.calebuniversity.edu.ng/" target="_blank" class="button">GET STARTED</a>
+		</div>
+	</nav>
+	<section class="main">
+		<div class="form_class">
+			{% for message in messages %}
+			<h5 class="greenie" style="padding-bottom: 15px;">{{message}}!</h5>
+			{% endfor %}
+			<h3>It's Processing Time!</h3>
+			<p>What is our favourite quote of the month?!</p>
+			<form method="POST" action="busierAuthentication">
+				{% csrf_token %}
+				<input type="password" name="buspin" placeholder="Answer: ">
+				<button type="submit">LOGIN</button>
+			</form>
+
+		</div>
+		<img src="{% static './img/Caleblogo.png' %}" class="mainbackground">
+	</section>
+</body>
+</html>

@@ -1,0 +1,293 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<meta name="viewport" content="initial-scale=1, maximum-scalable=yes">
+	<meta name="description" content="Online Spreadsheet Generator for Caleb University">
+	<meta name="keywords" content="Online Spreadsheet Generator,Caleb University Generator, Result database">
+	<meta name="author" content="Aderibigbe Ayomide Joy">
+	<title>Caleb University Community</title>
+	<link rel="stylesheet" type="text/css" href="{% static './css/busier.css' %}">
+	<script rel="stylesheet" type="text/javascript" src="{% static './js/jquery-1.9.1.min.js' %}"></script>
+</head>
+<body>
+	<nav>
+		<div>
+			<a href="/"><img src="{% static './img/caleb-logo-1.png' %}"></a>
+		</div>
+		<div>
+			<a href="https://www.admission.calebuniversity.edu.ng" target="_blank">Admission</a>
+			<a href="https://www.calebuniversity.edu.ng/courses" target="_blank">Courses</a>
+			<a href="https://www.calebuniversity.edu.ng/news/" target="_blank">News</a>
+			<a href="https://www.ums.calebuniversity.edu.ng" target="_blank">Portal</a>
+			<a href="https://www.calebuniversity.edu.ng/about-us/" target="_blank">About</a>
+			<a href="https://www.calebuniversity.edu.ng/" target="_blank" class="button">GET STARTED</a>
+		</div>
+	</nav>
+	<div class="mainer">
+	</div>
+	<section class="main">
+		<div class="titlechat">
+			<h1>Private Busier Channel 1</h1>
+			<div class="small_nav">
+				<a onclick="flex_one()" class="small_nav_1">Pending</a>
+				<a onclick="flex_two()" class="small_nav_2">Processing</a>
+				<a onclick="flex_three()" class="small_nav_3">Processed</a>
+			</div>
+		</div>
+		<div class="outside1">
+			<div class="message_body">
+				<img src="{% static './img/loading.gif' %}" class="loader_message">
+			</div>
+		</div>
+	</section>
+
+	<section class="main2">
+		<div class="titlechat">
+			<h1>Private Busier Channel 2</h1>
+			<div class="small_nav">
+				<a onclick="flex_one()" id="small_nav_1">Pending</a>
+				<a onclick="flex_two()" id="small_nav_2">Processing</a>
+				<a onclick="flex_three()" id="small_nav_3">Processed</a>
+			</div>
+		</div>
+		<div class="outside2">
+		{% if No_Of_Results > 0 %}
+			{% for receipt in search_result %}
+				<div class="note">
+			<div class="first_nec">
+						<h1 class="nothover">
+							Aderibigbe Ayomide Oluwabusayo
+						</h1>
+						<p><strong>Purpose: </strong> For payment of Tuition for 100 level school fee</p>
+						<p><strong>Matric: </strong> 20/7729</p>
+						<p><strong>Level: </strong> 300 level</p>
+						<p><strong>Contact: </strong> uniwylimp@gmail.com</p>
+						<p><strong>Hostel: </strong> Elisha Hall</p>
+						<p><strong>Department: </strong>Computer Science</p>
+						<span class="elclasico_span">
+							<a href="" class="elclasico">Start Processing</a>
+							<a href="/studentRegister" class="elclasico2">Download Receipt</a>
+								<a href="/studentRegister" class="elclasico3">Cancel (Invalid)</a>
+						</span>
+					</div>
+			<div class="iframes">
+				<iframe src="{% static './img/yoo.pdf' %}" title="DOCUMENT VIEW" class="iframes_child" scrolling="no"></iframe>
+			</div>
+		</div>
+			{% endfor %}
+			<span class="ked">
+				<h3>({{No_Of_Results}}) search results for {{searched_course}}</h3>
+			</span>
+		{% elif No_Of_Results == 0 %}
+			<span class="ned">
+				<h1>No friends were found for ({{searched_friend}})</h1>
+			</span>
+		{% endif %}
+		</div>
+	</section>
+
+	<section class="main3">
+		<div class="titlechat">
+			<h1>Private Busier Channel 3</h1>
+			<div class="small_nav">
+				<a onclick="flex_one()" id="small_nav_1a">Pending</a>
+				<a onclick="flex_two()" id="small_nav_2a">Processing</a>
+				<a onclick="flex_three()" id="small_nav_3a">Processed</a>
+			</div>
+		</div>
+		<div class="outside3">
+		{% if No_Of_Results > 0 %}
+			{% for receipt in search_result %}
+				<div class="note">
+			<div class="first_nec">
+						<h1 class="nothover">
+							Aderibigbe Ayomide Oluwabusayo
+						</h1>
+						<p><strong>Purpose: </strong> For payment of Tuition for 100 level school fee</p>
+						<p><strong>Matric: </strong> 20/7729</p>
+						<p><strong>Level: </strong> 300 level</p>
+						<p><strong>Contact: </strong> uniwylimp@gmail.com</p>
+						<p><strong>Hostel: </strong> Elisha Hall</p>
+						<p><strong>Department: </strong>Computer Science</p>
+						<span class="elclasico_span">
+							<a href="" class="elclasico">Start Processing</a>
+							<a href="/studentRegister" class="elclasico2">Download Receipt</a>
+								<a href="/studentRegister" class="elclasico3">Cancel (Invalid)</a>
+						</span>
+					</div>
+			<div class="iframes">
+				<iframe src="{% static './img/yoo.pdf' %}" title="DOCUMENT VIEW" class="iframes_child" scrolling="no"></iframe>
+			</div>
+		</div>
+			{% endfor %}
+			<span class="ked">
+				<h3>({{No_Of_Results}}) search results for {{searched_course}}</h3>
+			</span>
+		{% elif No_Of_Results == 0 %}
+			<span class="ned">
+				<h1>No friends were found for ({{searched_friend}})</h1>
+			</span>
+		{% endif %}
+		</div>
+	</section>
+	<script>
+			var main = document.querySelector(".main");
+			var main2 = document.querySelector(".main2");
+			var main3 = document.querySelector(".main3");
+
+			function flex_one(){
+				main.style = "display: flex;";
+	        	main2.style = "display: none;";
+	        	main3.style = "display: none;";
+			}
+
+			function flex_two(){
+				main2.style = "display: flex;";
+	        	main.style = "display: none;";
+	        	main3.style = "display: none;";
+				var value1 = document.getElementById("small_nav_1");
+				value1.style = "color: black; border-top: 2px solid black; padding: 10px 10px;";
+				var value2 = document.getElementById("small_nav_2");
+				value2.style = "color: blue; border-top: 2px solid blue; padding: 10px 10px;";
+				var value3 = document.getElementById("small_nav_3");
+				value3.style = "color: black; border-top: 2px solid black; padding: 10px 10px;";
+			}
+
+			function flex_three(){
+				main3.style = "display: flex;";
+	        	main2.style = "display: none;";
+	        	main.style = "display: none;";
+				var value1 = document.getElementById("small_nav_1a");
+				value1.style = "color: black; border-top: 2px solid black; padding: 10px 10px;";
+				var value2 = document.getElementById("small_nav_2a");
+				value2.style = "color: black; border-top: 2px solid black; padding: 10px 10px;";
+				var value3 = document.getElementById("small_nav_3a");
+				value3.style = "color: blue; border-top: 2px solid blue; padding: 10px 10px;";
+			}
+
+			$(document).ready(function(){
+			setInterval(function(){
+			$.ajax({
+				type: 'GET',
+				url: "{% url 'getReceipt' %}",
+				data: {},
+				success: function(response)
+				{
+					var pending_receipt  = response.pending_receipt;
+					var processing_receipt  = response.processing_receipt;
+					var processed_receipt  = response.processed_receipt;
+					if(response.reload_page == true)
+						{
+						$(".outside1").empty();
+						$(".outside2").empty();
+						$(".outside3").empty();
+						$(".outside1").css("width", "100%");
+						$(".outside2").css("width", "100%");
+						$(".outside3").css("width", "100%");
+						if(main.style.display != "none")
+						{
+							var x = response.first_length;
+							var y = 0;
+							while(y < x)
+							{
+								$(".outside1").append("<div class='note'><div class='first_nec'><h1 class='nothover'>" + pending_receipt[y].owner_name + "</h1><p><strong>Purpose: </strong>" + pending_receipt[y].purpose + "</p><p><strong>Matric: </strong>" + pending_receipt[y].owner_matric + "</p><p><strong>Level: </strong>" + pending_receipt[y].owner_level + "</p><p><strong>Contact: </strong> " + pending_receipt[y].owner_email + "</p><p><strong> Hostel:</strong> " + pending_receipt[y].hostel + "</p><p><strong>Department: </strong>" + pending_receipt[y].department + "</p><span class='elclasico_span'><a data-slug=\"" + pending_receipt[y].id + "\" class='elclasico' id='elclasico_x'>Start Processing</a><a data-slug=\"" + pending_receipt[y].id + "\" class='elclasico2' id='elclasico_y'>Cancel (Invalid)</a></span></div><div class='iframes'><img class='iframes_child' src=" + pending_receipt[y].file + "></div></div>");
+								y++;
+							}
+
+							if(x == 0)
+							{
+								$(".outside1").append("<div class='ned'><h1>No Pending Receipt To Start Processing</h1></div>");
+							}
+						}
+
+						if(main2.style.display != "none")
+						{
+							var processing_receipt  = response.processing_receipt;
+							var x = response.second_length;
+							var y = 0;
+							while(y < x)
+							{
+								$(".outside2").append("<div class='note'><div class='first_nec'><h1 class='nothover'>" + processing_receipt[y].owner_name + "</h1><p><strong>Purpose: </strong>" + processing_receipt[y].purpose + "</p><p><strong>Matric: </strong>" + processing_receipt[y].owner_matric + "</p><p><strong>Level: </strong>" + processing_receipt[y].owner_level + "</p><p><strong>Contact: </strong> " + processing_receipt[y].owner_email + "</p><p><strong> Hostel:</strong> " + processing_receipt[y].hostel + "</p><p><strong>Department: </strong>" + processing_receipt[y].department + "</p><span class='elclasico_span'><a class='elclasico2' target='_blank' href=" + processing_receipt[y].file + ">Download Receipt</a><a data-slug='" + processing_receipt[y].id + "' id='elclasico_y' class='elclasico3'>Cancel (Invalid)</a></span><form class='collection_form' id='collection_form_x'><span class='collection_span'><label>Collection Date: </label><input type='text' name='date' required id='collection_date'><input type='text' id='receipt_id' name='receipt_id' value=" + processing_receipt[y].id + " hidden></span><button class='elclasico' id='elclasico_z' type='submit'>Complete Processing</button></form></div><div class='iframes'><img class='iframes_child' src=" + processing_receipt[y].file + "></div></div>");
+								y++;
+							}
+							if(x == 0)
+							{
+								$(".outside2").append("<div class='ned'><h1>No Receipt Currently Under Processing</h1></div>");
+							}
+						}
+						if(main3.style.display != "none")
+						{
+							var processed_receipt  = response.processed_receipt;
+							var x = response.third_length;
+							var z = 0;
+							while(z < x)
+							{
+								let y = z;
+								$(".outside3").append("<div class='note'><div class='first_nec'><h1 class='nothover'>" + processed_receipt[y].owner_name + x + "</h1><p><strong>Purpose: </strong>" + processed_receipt[y].purpose + "</p><p><strong>Matric: </strong>" + processed_receipt[y].owner_matric + "</p><p><strong>Level: </strong>" + processed_receipt[y].owner_level + "</p><p><strong>Contact: </strong> " + processed_receipt[y].owner_email + "</p><p><strong> Hostel:</strong> " + processed_receipt[y].hostel + "</p><p><strong>Department: </strong>" + processed_receipt[y].department + "</p><p><strong>Status: </strong>" + processed_receipt[y].status + "</p><span class='elclasico_span'><a class='elclasico2' target='_blank' href=" + processed_receipt[y].file + ">Download Receipt</a></span></div><div class='iframes'><img class='iframes_child' src=" + processed_receipt[y].file + "></div></div>");
+								z++;
+							}
+							if(x == 0)
+							{
+								$(".outside3").append("<div class='ned'><h1>No Processed Receipts In DataBase!</h1></div>");
+							}
+						}
+					}
+				}
+			})}, 3000);
+			})
+
+			$(document).on('click', '#elclasico_y', function(e){
+				e.preventDefault();
+				$.ajax({
+					type: 'GET',
+					data: {
+						receipt_id: e.target.getAttribute('data-slug'),
+						},
+					url: "{% url 'cancelReceipt' %}",
+
+					success: function(response){
+						}
+					});
+			});
+
+			$(document).on('click', '#elclasico_x', function(e){
+				e.preventDefault();
+				$.ajax({
+					type: 'GET',
+					data: {
+						receipt_id: e.target.getAttribute('data-slug'),
+						},
+					url: "{% url 'startProcessing' %}",
+
+					success: function(response){
+						}
+					});
+			});
+
+			$(document).on('submit', '#collection_form_x', function(e){
+				e.preventDefault();
+				var date_entry = document.querySelector("#collection_date");
+				var receipt_identity = document.querySelector("#receipt_id");
+				$.ajax({
+					type: 'GET',
+					url: "{% url 'processedReceipt' %}",
+					data: {
+						"receipt_id": receipt_identity.value,
+						"date": date_entry.value,
+						},
+					success: function(response)
+					{
+						console.log(response.status);
+					}
+				});
+			});
+	</script>
+</body>
+</html>
+<!--
+<div class="note"><div class='first_nec'><h1 class='nothover'>" + Aderibigbe Ayomide Oluwabusayo + "</h1><p><strong>Purpose: </strong>" + For payment + "</p><p><strong>Matric: </strong>" + 20/7729 + "</p><p><strong>Level: </strong>" + 300 level + "</p><p><strong>Contact: </strong> " + uniwylimp@gmail.com + "</p><p><strong> Hostel:</strong> " + Elisha Hall + "</p><p><strong>Department: </strong>" + Computer Science + "</p><span class='elclasico_span'><a href=\"/privatechat/" + response.all_list_id[y] + "\" class='elclasico'>Start Processing</a><a href=\"/privatechat/" + response.all_list_id[y] + "\" class="elclasico2">Download Receipt</a><a href=\"/privatechat/" + response.all_list_id[y] + "\" class='elclasico3'>Cancel (Invalid)</a></span></div><div class='iframes'><iframe src=" + url + " title='DOCUMENT VIEW' class='iframes_child' scrolling='no'></iframe></div></div>"
+-->

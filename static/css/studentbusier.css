@@ -1,0 +1,525 @@
+* 
+{
+	margin: 0;
+	padding: 0;
+	overflow-y: visible;
+	box-sizing: border-box;
+    transition: all 0.8s ease-in-out;
+} 
+
+:root{
+    --primary-shade: #930000;
+    --gray-white: #C3c3c3;
+    --secondary-color: #Fbb040;
+    --light-color: #fff;
+    --dark-color: #000;
+}
+
+body{
+   font-family: 'Montserrat', sans-serif;
+   font-size: 12px;
+   background-position: center;
+   background: #fafaf9; /*#C3c3c3;*/
+   background-attachment: fixed;
+   background: url('../img/nediox.png');
+
+}
+
+
+@font-face
+{
+    font-family: "Montserrat-regular-thin";
+    src: url(../fonts/Montserrat-medium.ttf) format('woff2');
+}
+
+@font-face
+{
+	font-family: "Montserrat-bold";
+	src: url(../fonts/Montserrat-ExtraBold.ttf) format('woff2');
+}
+
+@font-face
+{
+	font-family: "Montserrat";
+	src: url(../fonts/Montserrat-Regular.ttf) format('woff2');
+}
+
+@font-face
+{
+    font-family: "Montserrat-Medium";
+    src: url(../fonts/Montserrat-Medium.ttf) format('woff2');
+}
+
+@font-face
+{
+	font-family: "Montserrat-regular-bold";
+	src: url(../fonts/Montserrat-SemiBold.ttf) format('woff2');
+}
+
+@font-face
+{
+    font-family: "Sunata";
+    src: url(../fonts/Montserrat-light.ttf) format('woff2');
+}
+
+/* Global Styles */
+ul
+{
+    list-style: none;
+}
+
+a
+{
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--dark-color);
+}
+
+
+a:hover
+{
+    color: yellowgreen;
+}
+
+img
+{
+    width: 100%;
+}
+.greenie
+{
+    color: green;
+}
+/***
+ * Global End 
+ * 
+ * Section Stylng Starts
+ * 
+ ***/
+
+nav
+{
+    height: 11.5vh;
+    width: 100%;
+    margin: auto;
+    padding: 0px 7.5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    background: white;
+    box-shadow: rgba(11, 10, 10, 1.0) 1px 1px 2px;
+    position: fixed;
+    z-index: 7;
+}
+
+nav img
+{
+    max-height: 40px;
+    width: auto;
+}
+
+nav a 
+{
+    margin: 0px 20px;
+    font-family: 'Montserrat-Medium';
+}
+.button
+{
+    padding: 10px 20px;
+    background: green;
+    color: var(--light-color);
+    font-family: 'Montserrat-regular-bold';
+}
+
+nav div:nth-child(1)
+{
+    width: 40%;
+}
+
+nav div:nth-child(2)
+{
+    width: 60%;
+    text-align: right;
+}
+
+.main 
+{
+    height: auto;
+    width: 50%;
+    min-height: 90vh;
+    margin-left: 36%;
+    margin-top: 0vh;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--light-color);
+    border-radius: 15px;
+    position: absolute;
+    z-index: 3;
+    border: 1px solid #eee;
+    box-shadow: rgba(11, 10, 10, 1.0) 1px 1px 1px;
+}
+
+.titlechat
+{
+    width: 95%;
+    margin: auto;
+    margin-bottom: 5.8px;
+    margin-top: 0px;
+    height: auto;
+    padding: 10px 20px;
+}
+
+.titlechat h2 
+{
+    font-family: 'Montserrat-regular-thin';
+    font-size: 26px;
+    width: 85%;
+    padding: 2px 5px;
+}
+
+.contain_me
+{
+    position: fixed;
+    top: 0px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    z-index: 6;
+    overflow: hidden;
+}
+
+.postnews
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 35%;
+    height: auto;
+    margin: 0px 10px 10px;
+    padding: 50px 50px 50px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: rgba(11, 11, 11, 1.0) 1px 1px 3.5px;
+}
+
+.postnews span
+{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 21.5px;
+    align-items: center;
+    width: 83%;
+}
+
+.postnews h2
+{
+    font-size: 18px;
+    width: 90%;
+}
+
+.postnews img
+{
+    width: 25px;
+    height: 25px;
+    box-size: cover;
+}
+
+.postnews input
+{
+    width: 80%;
+    height: 35px;
+    padding: 5px 10px;
+    margin: 5px 0px;
+    border-radius: 7.5px;
+    border: 2px solid black;
+}
+
+.postnews textarea
+{
+    width: 80%;
+    height: 105px;
+    padding: 5px 10px;
+    margin: 5px 0px;
+    border-radius: 7.5px;
+    border: 2px solid black;
+}
+
+.postnews button
+{
+    width: 80%;
+    height: 40px;
+    padding: 5px;
+    margin: 5px 0px;
+    border-radius: 7.5px;
+    background: green;
+    color: white;
+    font-size: 13px;
+    font-weight: 800;
+    border: none;
+}
+
+.postnews input:focus
+{
+    outline: none !important;
+    border: 2px solid darkblue;
+    box-shadow: 0 0 7px darkblue;
+}
+
+.postnews textarea:focus
+{
+    outline: none !important;
+    border: 2px solid darkblue;
+    box-shadow: 0 0 7px darkblue;
+}
+
+.black
+{
+    color: black;
+}
+
+.note
+{
+    width: 98%;
+    margin: auto;
+    margin-bottom: 2.8px;
+    margin-top: 2px;
+    min-height: 120px;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    border: 1px dashed green;
+    border-radius: 15px;
+
+}
+
+.note div 
+{
+    width: 100%;
+}
+.note span
+{
+    width: 100%;
+}
+
+.note span p:nth-child(1)
+{
+    width: 100%;
+}
+
+.note h3
+{
+    font-size: 15.5px;
+    font-family: 'Montserrat-bold';
+    margin: 0;
+    padding: 0;
+    color: black;
+}
+
+.note p 
+{
+    padding: 2.5px 0px;
+    margin: 0;
+    font-size: 12px;
+    opacity: 0.95;
+    font-family: 'Montserrat-regular-thin';
+}
+
+.note span p:nth-child(2)
+{
+    padding: 0px;
+    font-size: 10px;
+}
+
+.note div
+{
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0px 10px;
+}
+
+.mainer
+{
+    height: 15vh;
+}
+
+.sidebar
+{
+    width: 20%;
+    height: 80%;
+    background: white;
+    position: fixed;
+    top: 15vh;
+    left: 15%;
+}
+
+.navigation
+{
+    width: 100%;
+    height: 400px;
+    background: var(--light-color);
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    box-shadow: rgba(11, 10, 10, 1.0) 1px 1px 2px;
+    margin-bottom: 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+.navigation div:nth-child(1)
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+    width: 100%;
+    box-shadow: rgba(11, 11, 11, 1.0) -0.1px 0px 1px;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    padding: 5px 0px;
+}
+
+.navigation div:nth-child(1) h3
+{
+    text-align: center;
+    margin: 0;
+    padding: 5px 0px;
+    font-family: 'Montserrat-regular-thin';
+}
+
+.navigation div:nth-child(1) p
+{
+    text-align: center;
+    font-family: 'Montserrat-regular-thin';
+    opacity: 0.6;
+    margin: 0;
+    padding: 0;
+}
+
+.navigation div:nth-child(2)
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: center;
+    flex: 3;
+    width: 100%;
+    box-shadow: rgba(11, 11, 11, 1.0) -0.1px 0px 1px;
+}
+
+.navigation div:nth-child(2) a 
+{
+
+    font-family: 'Montserrat-regular-bold';
+    color: var(--dark-color);
+    padding: 5% 20px;
+    display: flex;
+    align-items: center;
+}
+
+.navigation div:nth-child(2) img
+{
+    height: 15.5px;
+    width: 15.5px;
+    object-fit: cover;
+    margin: 5px;
+}
+
+.med
+{
+    display: flex;
+    align-items: center;
+}
+
+.med h2
+{
+    width: 80%;
+}
+
+.med a
+{
+    color: green;
+    border: 1px solid green;
+    background: white;
+    border-radius: 15px;
+    padding: 7.5px 15px;
+}
+
+.podcast_name
+{
+    color: darkblue;
+}
+
+.podcast_author
+{
+    color: green;
+}
+
+.download
+{
+    width: inherit;
+    overflow-x: hidden;
+}
+
+.download p
+{
+    overflow-x: hidden;
+}
+
+.banner
+{
+    border: 2px solid green;
+}
+
+.inputone
+{
+    display: none;
+    padding: 10px 50px;
+    margin: 5px 0px;
+}
+
+.labelone
+{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+    cursor:pointer;
+    background: var(--couple-light);
+    width: 80%;
+    min-height: 60px;
+    overflow: hidden;
+    padding: 10px 0px 10px 25px;
+    border: 2px solid black;
+    border-radius: 7.5px;
+}
+
+.labelone:hover
+{
+    outline: none !important;
+    border: 2px solid green;
+    box-shadow: 0 0 7px green;
+}
+
+#imageName
+{
+    color: green;
+}
+
+.imageage
+{
+	width: 25px;
+	height: 25px;
+	object-size: cover;
+	margin: 5px 10px;
+}

@@ -1,0 +1,267 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<meta name="viewport" content="initial-scale=1, maximum-scalable=yes">
+	<meta name="description" content="Online Caleb Community">
+	<meta name="keywords" content="Online Spreadsheet Generator, Caleb University Generator, Result database, Online Caleb Community">
+	<meta name="author" content="Aderibigbe Ayomide Joy">
+	<title>Caleb University Community</title>
+	<link rel="stylesheet" type="text/css" href="{% static './css/findpeers.css' %}">
+	<script rel="stylesheet" type="text/javascript" src="{% static './js/jquery-1.9.1.min.js' %}"></script>
+</head>
+<body>
+	<nav>
+		<div>
+			<a href="index.html"><img src="{% static './img/caleb-logo-1.png' %}"></a>
+		</div>
+		<div>
+			<a href="https://www.admission.calebuniversity.edu.ng" target="_blank">Admission</a>
+			<a href="https://www.calebuniversity.edu.ng/courses" target="_blank">Courses</a>
+			<a href="https://www.calebuniversity.edu.ng/news/" target="_blank">News</a>
+			<a href="https://www.ums.calebuniversity.edu.ng" target="_blank">Portal</a>
+			<a href="https://www.calebuniversity.edu.ng/about-us/" target="_blank">About</a>
+			<a href="/logout" class="button">Sign Off</a>
+		</div>
+	</nav>
+	<div class="mainer"></div>
+	{% if is_searched == False %}
+	<section class="main">
+				<div class="invitation">
+					<div class="invite">
+						<p>Requests</p>
+						<form method="POST" action="findpeers">
+						{% csrf_token %}
+						<img src="{% static './img/search.svg' %}">
+						<input type="text" name="person_search" placeholder="Looking for someone..." >
+						</form>
+
+					{% if No_of_request > 3 %}
+						<p><a href="#" id="view_all"><span class="reddie">See all ({{No_of_request}})</span></a></p>
+					{% endif %}
+					</div>
+					{% if No_of_request == 0 %}
+					<span class="ked">
+					<h2>You do not currently have a Peer request, come back later!</h2>
+					</span>
+					{% endif %}
+					{% for invite in Friend_requests_three %}
+					<div class="invite1">
+						<a href="{% url 'viewprofile' invite.member_id %}">
+							{% if invite.member_picture == "none" %}
+								<img src="{% static './img/new_person.png' %}">
+							{% else %}
+								<img src={{invite.member_picture}}>
+							{% endif %}
+						</a>
+						<div class="invitesub">
+							<h3>{{invite.member_name}}</h3>
+							<p>{{invite.member_status}} at Caleb University</p>
+							<div>
+								<a href="#" id="accept_request" data-slug="{{invite.invite_id}}" class="p{{invite.invite_id}}">Accept</a>
+								<a href="#" id="delete_request" data-slug="{{invite.invite_id}}" class="q{{invite.invite_id}}">Delete</a>
+								<p class="r{{invite.invite_id}}"></p>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+				<div class="addppl">
+					<div class="addtitle">
+						<p>People you may know</p>
+					</div>
+					{% for row in suggestion %}
+					<div class="addrow">
+						{% for single in row %}
+						<div class="addsingle">
+							<a href="{% url 'viewprofile' single.member_id %}">
+								{% if single.member_picture == "none" %}
+								<img src="{% static './img/new_person.png' %}">
+								{% else %}
+									<img src={{single.member_picture}}>
+								{% endif %}
+							</a>
+							<h4>{{single.member_name}}</h4>
+							<p>{{single.member_status}} at Caleb Univ</p>
+							<div>
+								<a href="#" data-slug="{{single.member_id}}" class="k{{single.member_id}}" id="singleitem">Connect</a>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+					{% endfor %}
+				</div>
+	</section>
+	{% elif is_searched == True %}
+	<section class="main">
+		<div class="invitationx">
+					<div class="invitex">
+						<p><strong>Search Results ({{No_of_search}})</strong></p>
+						<p><a href="/findpeers"><span class="reddie">Exit(Back)</span></a></p>
+					</div>
+					{% if No_of_search > 0 %}
+					{% for search in search_result %}
+					<div class="invite1">
+						<a href="{% url 'viewprofile' search.member_id %}">
+							{% if search.member_picture == "none" %}
+								<img src="{% static './img/new_person.png' %}">
+							{% else %}
+								<img src={{search.member_picture}}>
+							{% endif %}
+						</a>
+						<div class="invitesubx">
+							<h3>{{search.member_name}}</h3>
+							<p>{{search.member_status}} at Caleb University</p>
+							<div class="mexican">
+								<a href="#"  data-slug="{{search.member_id}}" class="k{{search.member_id}}" id="singleitem">Connect</a>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+					<span class="ked">
+					<h3>({{No_of_search}}) search results for ({{searched_peer}})</h3>
+					</span>
+					{% elif No_of_search == 0 %}
+					<span class="ned">
+						<h1>No New Peers were found with the name ({{searched_peer}})</h1>
+					</span>
+					{% endif %}
+					</div>
+	</section>
+	{% endif %}
+	<section class="sidebar">
+		<div class="navigation">
+			<div>
+				<h3>Navigations</h3>
+				<p>Explore this new world now!</p>
+			</div>
+			<div class="movoro">
+				<a href="/home"><img src="{% static './img/person-circle.svg' %}">Profile</a>
+				<a href="/book"><img src="{% static './img/house-fill.svg' %}">Library</a>
+				<a href="/chats"><img src="{% static './img/chat-dots.svg' %}">Chats</a>
+				<a href="/groups"><img src="{% static './img/house-fill.svg' %}">Groups</a>
+				<a href="/peers"><img src="{% static './img/plus-circle.svg' %}"> Peers</a>
+				<a href="/findpeers"><img src="{% static './img/person-plus-fill.svg' %}"> Find Peers</a>
+			</div>
+		</div>
+		<div class="banner">
+
+		</div>
+	</section>
+	<div id="view_all_request" class="viewallrequest">
+		<div class="friend_request_box">
+			<div class="invitex">
+						<p><strong>Friend Requests ({{No_of_request}})</strong></p>
+						<p><a href="/findpeers"><span class="reddie">Exit(Back)</span></a></p>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(document).on('click', '#view_all', function(e){
+			$("#view_all_request").css({"display": "flex"});
+			$(".main").css({"position": "fixed", "opacity": "0.45"});
+			$(".sidebar").css({"position": "fixed", "opacity": "0.45"});
+			$.ajax({
+				type: 'GET',
+				data: {
+					},
+				url: "{% url 'getrequest' %}",
+
+				success: function(response){
+				console.log(response.friend_request_all)
+				var x = response.friend_request_all.length;
+				var y = 0;
+				while(y < x)
+				{
+					var new_profile_image = "";
+					if(response.friend_request_all[y].member_picture == "none")
+					{
+						new_profile_image = "/static/img/new_person.png";
+					}
+
+					else
+					{
+						new_profile_image = response.friend_request_all[y].member_picture;
+					}
+
+					$(".friend_request_box").append("<div class='invite1'><a href=\"{% url 'viewprofile' " + response.friend_request_all[y].member_id + " %}\"><img src=" + new_profile_image + " ></a><div class='invitesub'><h3>" + response.friend_request_all[y].member_name + "</h3><p>" + response.friend_request_all[y].member_status + " at Caleb University</p><div><a href='#' id='accept_request' data-slug=\"" + response.friend_request_all[y].invite_id + "\" class='p" + response.friend_request_all[y].invite_id + "'>Accept</a><a href='#' id='delete_request' data-slug=\"" + response.friend_request_all[y].invite_id + "\" class='q" + response.friend_request_all[y].invite_id + "'>Delete</a><p class='r" + response.friend_request_all[y].invite_id + "'></p></div></div></div>");
+					y++;
+				}
+				}
+				});
+			});
+
+		$(document).on('click', '#accept_request', function(e){
+			e.preventDefault();
+			$.ajax({
+				type: 'GET',
+				data: {
+					receiver: e.target.getAttribute('data-slug'),
+					status: "accepted"
+					},
+				url: "{% url 'confirmrequest' %}",
+
+				success: function(response){
+					console.log('friend request sent ');
+					$(String(".r" + String(e.target.getAttribute('data-slug')))).css({"color": "blue", "border-radius":"5px", "border": "1px solid blue", "background": "white", "padding": "6.5px 20px"});
+					$(String(".r" + String(e.target.getAttribute('data-slug')))).html("Request Accepted");
+					$(String(".q" + String(e.target.getAttribute('data-slug')))).css({"display": "none"});
+					$(String(".p" + String(e.target.getAttribute('data-slug')))).css({"display": "none"});
+					}
+				});
+			});
+
+		$(document).on('click', '#delete_request', function(e){
+			e.preventDefault();
+			$.ajax({
+				type: 'GET',
+				data: {
+					receiver: e.target.getAttribute('data-slug'),
+					status: "deleted"
+					},
+				url: "{% url 'confirmrequest' %}",
+
+				success: function(response){
+					console.log('friend request sent ');
+					$(String(".r" + String(e.target.getAttribute('data-slug')))).css({"color": "blue", "border-radius":"5px", "border": "1px solid blue", "background": "white", "padding": "5.5px 20px"});
+					$(String(".r" + String(e.target.getAttribute('data-slug')))).html("Request Deleted");
+					$(String(".q" + String(e.target.getAttribute('data-slug')))).css({"display": "none"});
+					$(String(".p" + String(e.target.getAttribute('data-slug')))).css({"display": "none"});
+					}
+				});
+			});
+		$(document).on('click', '#singleitem', function(e){
+			console.log('clicked me: ' + e.target.getAttribute('data-slug'));
+			console.log("k" + String(e.target.getAttribute('data-slug')));
+			//$('#singleitem').css('color', 'blue');
+			e.preventDefault();
+			//$('.banner').css({'color': 'blue', 'background': blue});
+			$.ajax({
+				type: 'GET',
+				data: {
+					receiver: e.target.getAttribute('data-slug')
+					},
+				url: "{% url 'friendrequest' %}",
+
+				success: function(response){
+					console.log('friend request sent ' + response.Status);
+					if (response.Status == true)
+					{
+						console.log('friend request sent ');
+						$(String(".k" + String(e.target.getAttribute('data-slug')))).css({"color": "blue", "border": "1px solid blue"});
+						$(String(".k" + String(e.target.getAttribute('data-slug')))).html("Request Sent");
+					}
+					else
+					{
+						console.log('friend request deleted ');
+						$(String(".k" + String(e.target.getAttribute('data-slug')))).css({"color": "green", "border": "1px solid green", "background": "white"});
+						$(String(".k" + String(e.target.getAttribute('data-slug')))).html("Connect");
+					}
+					}
+				});
+			});
+	</script>
+</body>
+</html>

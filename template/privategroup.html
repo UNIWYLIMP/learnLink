@@ -1,0 +1,281 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<meta name="viewport" content="initial-scale=1, maximum-scalable=yes">
+	<meta name="description" content="Online Spreadsheet Generator for Caleb University">
+	<meta name="keywords" content="Online Spreadsheet Generator,Caleb University Generator, Result database">
+	<meta name="author" content="Aderibigbe Ayomide Joy">
+	<title>Caleb University Community</title>
+	<link rel="stylesheet" type="text/css" href="{% static './css/privategroup.css' %}">
+	<script rel="stylesheet" type="text/javascript" src="{% static './js/jquery-1.9.1.min.js' %}"></script>
+</head>
+<body>
+	<nav>
+		<div>
+			<a href="index.html"><img src="{% static './img/caleb-logo-1.png' %}"></a>
+		</div>
+		<div>
+			<a href="https://www.admission.calebuniversity.edu.ng" target="_blank">Admission</a>
+			<a href="https://www.calebuniversity.edu.ng/courses" target="_blank">Courses</a>
+			<a href="https://www.calebuniversity.edu.ng/news/" target="_blank">News</a>
+			<a href="https://www.ums.calebuniversity.edu.ng" target="_blank">Portal</a>
+			<a href="https://www.calebuniversity.edu.ng/about-us/" target="_blank">About</a>
+			<a href="/logout" class="button">Sign Off</a>
+		</div>
+	</nav>
+	<div class="mainer">
+
+	</div>
+	<section class="main">
+		<div class="titlechat">
+			{% if group_picture == "none" %}
+			<img src="{% static './img/new_person.png.jpg' %}">
+			{% else %}
+			<img src={{group_picture}}>
+			{% endif %}
+			<h2>{{group_name|truncatewords:8}}</h2>
+			<div class="details">
+				<a href="{% url 'editgroup' group_id %}"><img src="{% static './img/menu1.png' %}"></a>
+			</div>
+		</div>
+		<div class="message_body">
+			<img src="{% static './img/loading.gif' %}" class="loader_message">
+		</div>
+		<div class="message_box">
+			<form id="message_form">
+				<input type="text" placeholder="write a message...">
+				<button type="submit">
+					<img src="{% static './img/send.svg' %}">
+				</button>
+			</form>
+		</div>
+		<div class="new_message">
+			<a href="#" id="click_message">
+				<img src="{% static './img/search.svg' %}">
+			</a>
+		</div>
+	</section>
+	<section class="sidebar">
+		<div class="navigation">
+			<div>
+				<h3>Navigations</h3>
+				<p>Explore this new world now!</p>
+			</div>
+			<div class="movoro">
+				<a href="/home"><img src="{% static './img/person-circle.svg' %}">Profile</a>
+				<a href="/book"><img src="{% static './img/house-fill.svg' %}">Library</a>
+				<a href="/chats"><img src="{% static './img/chat-dots.svg' %}">Chats</a>
+				<a href="/groups"><img src="{% static './img/house-fill.svg' %}">Groups</a>
+				<a href="/peers"><img src="{% static './img/plus-circle.svg' %}"> Peers</a>
+				<a href="/findpeers"><img src="{% static './img/person-plus-fill.svg' %}"> Find Peers</a>
+			</div>
+		</div>
+		<div class="banner">
+
+		</div>
+	</section>
+	<script type="text/javascript">
+		$('#message_form').on('submit', function(e){
+			e.preventDefault();
+			var form_is_message = document.querySelector("#message_form input");
+			$.ajax({
+				type: 'GET',
+				url: "{% url 'send_groupmessage' %}",
+				data: {
+					"new_message": form_is_message.value
+				},
+				success: function(response)
+				{
+					form_is_message.value = ""
+				}
+			})
+		})
+
+		var message_container = document.querySelector('.message_body')
+		$(document).ready(function(){
+			setInterval(function(){
+			var container_height = message_container.scrollHeight;
+			var height = window.innerHeight;
+			var noa = (window.pageYOffset || document.documentElement.scrollTop) - (document.documentElement.clientTop || 0);
+			console.log(noa + " is really here");
+			console.log("hit man hit");
+			var x_con = container_height - height;
+			scroll_value = "scrolled";
+			if(noa < x_con)
+			{
+				console.log("you scrolled really really!");
+				scroll_value = "scrolled";
+			}
+
+			else
+			{
+				console.log("common scroll!");
+				scroll_value = "not_scrolled";
+			}
+
+			console.log(x_con + " x_con value")
+			console.log(x_con-noa + " x_con value 3")
+			$.ajax({
+				type: 'GET',
+				url: "{% url 'reloadprivategroup' %}",
+				data: {},
+				success: function(response)
+				{
+					console.log(String(response.list_of_messages_id), " thos are 1111 is it")
+					console.log(String(response.list_of_messages), " thos are 2222 is it")
+					console.log(response.new_message, "first value")
+					console.log(response.private_group_reload_num + " second value")
+					console.log(((response.new_message == false) && (response.private_group_reload_num > 2)) + " second appraisal of refresh")
+					if ((response.new_message == false) && (response.private_group_reload_num > 2))
+					{
+						console.log(response.new_message, " nopsh")
+					}
+					else
+					{
+						if(response.private_group_reload_num < 3)
+						{
+							console.log(" YOU DID NOT SCROLLED \n\n\n\n\n");
+							console.log(message_container.scrollTop + " this is ur scroll top");
+							$(".message_body").empty();
+							var x = 0;
+							var newbie = response.list_of_messages_id.length;
+							console.log(x + " this is x")
+							while(x < newbie)
+							{
+								$(".message_body").append("<div class='date_chat'><p>" + response.list_of_messages_id[x] + ". </p></div>");
+								var y = 0;
+								console.log("this is x: " + x);
+								console.log(String(response.list_of_messages_id[x]), " thos is it")
+								console.log(String(response.list_of_messages_id[0]), " thos is it")
+								console.log(x + " thos is it")
+								console.log(response.list_of_messages[response.list_of_messages_id[x]])
+								var x_new = response.list_of_messages[response.list_of_messages_id[x]].length
+								while(x_new > y)
+								{
+
+									if(response.list_of_messages[response.list_of_messages_id[x]][y].sender == "me")
+									{
+										$(".message_body").append("<div class='indigine'><span><p>" + response.list_of_messages[response.list_of_messages_id[x]][y].messages + "</p><p>" + response.list_of_messages[response.list_of_messages_id[x]][y].time_sent + "</p></span></div>")
+									}
+									else
+									{
+										$(".message_body").append("<div class='foreign'><span><h3>" + response.list_of_messages[response.list_of_messages_id[x]][y].sender + "</h3><p>" + response.list_of_messages[response.list_of_messages_id[x]][y].messages + "</p><p>" + response.list_of_messages[response.list_of_messages_id[x]][y].time_sent + "</p></span></div>")
+									}
+									y++;
+								}
+								x++;
+							}
+							var x_container_height = message_container.scrollHeight;
+							var n_height = window.innerHeight;
+							window.scrollBy(0, message_container.scrollHeight);
+							var i_message = document.querySelector('.new_message');
+							i_message.style = "display: none;";
+						}
+
+						else if (scroll_value == "scrolled")
+						{
+							console.log(" YOU SCROLLED \n\n\n\n\n");
+							console.log(message_container.scrollTop + " this is ur scroll top");
+							$(".message_body").empty();
+							var x = 0;
+							var newbie = response.list_of_messages_id.length;
+							console.log(x + " this is x")
+							while(x < newbie)
+							{
+								$(".message_body").append("<div class='date_chat'><p>" + response.list_of_messages_id[x] + ". </p></div>");
+								var y = 0;
+								var x_new = response.list_of_messages[response.list_of_messages_id[x]].length
+								while(x_new > y)
+								{
+
+									if(response.list_of_messages[response.list_of_messages_id[x]][y].sender == "me")
+									{
+										$(".message_body").append("<div class='indigine'><span><p>" + response.list_of_messages[response.list_of_messages_id[x]][y].messages + "</p><p>" + response.list_of_messages[response.list_of_messages_id[x]][y].time_sent + "</p></span></div>")
+									}
+									else
+									{
+										$(".message_body").append("<div class='foreign'><span><p>" + response.list_of_messages[response.list_of_messages_id[x]][y].messages + "</p><p>" + response.list_of_messages[response.list_of_messages_id[x]][y].time_sent + "</p></span></div>")
+									}
+									y++;
+								}
+								x++;
+							}
+							var i_message = document.querySelector('.new_message');
+							i_message.style = "display: flex;";
+						}
+
+						else
+						{
+							console.log(" YOU DID NOT SCROLLED \n\n\n\n\n");
+							console.log(message_container.scrollTop + " this is ur scroll top");
+							$(".message_body").empty();
+							var x = 0;
+							var newbie = response.list_of_messages_id.length;
+							console.log(x + " this is x")
+							while(x < newbie)
+							{
+								$(".message_body").append("<div class='date_chat'><p>" + response.list_of_messages_id[x] + ". </p></div>");
+								var y = 0;
+								console.log("this is x: " + x);
+								console.log(String(response.list_of_messages_id[x]), " thos is it")
+								console.log(String(response.list_of_messages_id[0]), " thos is it")
+								console.log(x + " thos is it")
+								console.log(response.list_of_messages[response.list_of_messages_id[x]])
+								var x_new = response.list_of_messages[response.list_of_messages_id[x]].length
+								while(x_new > y)
+								{
+
+									if(response.list_of_messages[response.list_of_messages_id[x]][y].sender == "me")
+									{
+										$(".message_body").append("<div class='indigine'><span><p>" + response.list_of_messages[response.list_of_messages_id[x]][y].messages + "</p><p>" + response.list_of_messages[response.list_of_messages_id[x]][y].time_sent + "</p></span></div>")
+									}
+									else
+									{
+										$(".message_body").append("<div class='foreign'><span><h3>" + response.list_of_messages[response.list_of_messages_id[x]][y].sender + "</h3><p>" + response.list_of_messages[response.list_of_messages_id[x]][y].messages + "</p><p>" + response.list_of_messages[response.list_of_messages_id[x]][y].time_sent + "</p></span></div>")
+									}
+									y++;
+								}
+								x++;
+							}
+							var x_container_height = message_container.scrollHeight;
+							var n_height = window.innerHeight;
+							window.scrollBy(0, message_container.scrollHeight);
+							var i_message = document.querySelector('.new_message');
+							i_message.style = "display: none;";
+						}
+					}
+				}
+			})
+			}, 1000);
+		})
+
+		$('#click_message').click(function(e){
+			e.preventDefault();
+			var x_container_height = message_container.scrollHeight;
+			var n_height = window.innerHeight;
+			window.scrollBy(0, message_container.scrollHeight);
+			var i_message = document.querySelector('.new_message');
+			i_message.style = "display: none;";
+		})
+	</script>
+<!--
+	"<div class='date_chat'><p>" + December 14, 2022 + ". </p></div>"
+	"<div class='foreign'><span><p>" + this! + "</p><p>" + 13:56 + "</p></span></div>"
+	"<div class='indigine'><span><p>" + this! + "</p><P>" + 14:34 + "</p></span></div>"
+-->
+<!--
+when we reload sessions through ajax(we'll check through page length to see if there is a new message)
+-if there is no new message, no need to update the page call the next interval of reload
+-else if there is a new message, then we need to get the position of the user\
+---if user is in the lower bottom of the page then we can reload page and update new message
+---else if user is higher than the lower bottom then we want to create a small new message button(once user clicks the scroll down new message we want to take him down and make the new message notification go away.
+-->
+
+<!--
+if scroll position < box_height-page-height
+-->
+</body>
+</html>

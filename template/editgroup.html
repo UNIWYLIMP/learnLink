@@ -1,0 +1,150 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<meta name="viewport" content="initial-scale=1, maximum-scalable=yes">
+	<meta name="description" content="Online Spreadsheet Generator for Caleb University">
+	<meta name="keywords" content="Online Spreadsheet Generator,Caleb University Generator, Result database">
+	<meta name="author" content="Aderibigbe Ayomide Joy">
+	<title>Caleb University Community</title>
+	<link rel="stylesheet" type="text/css" href="{% static './css/editgroup.css' %}">
+	<script type="text/javascript" src="{% static './js/jquery-1.9.1.min.js' %}"></script>
+</head>
+<body>
+	<nav>
+		<div>
+			<a href="index.html"><img src="{% static './img/caleb-logo-1.png' %}"></a>
+		</div>
+		<div>
+			<a href="https://www.admission.calebuniversity.edu.ng" target="_blank">Admission</a>
+			<a href="https://www.calebuniversity.edu.ng/courses" target="_blank">Courses</a>
+			<a href="https://www.calebuniversity.edu.ng/news/" target="_blank">News</a>
+			<a href="https://www.ums.calebuniversity.edu.ng" target="_blank">Portal</a>
+			<a href="https://www.calebuniversity.edu.ng/about-us/" target="_blank">About</a>
+			<a href="/logout" class="button">Sign Off</a>
+		</div>
+	</nav>
+	<div class="mainer">
+
+	</div>
+	<section class="main" id="main">
+		<div class="profile">
+			<img src="{% static './img/person.png' %}" class="onep">
+			{% if group_picture == "none" %}
+			<img src="{% static './img/person5.jpg' %}" class="twop">
+			{% else %}
+			<img src={{group_picture}} class="twop">
+			{% endif %}
+			{% if admin_status == "True" %}
+			<a href="/addgroupmember"><img src="{% static './img/plus-circle.svg' %}" class="threep"></a>
+			{% endif %}
+		</div>
+		<h1 class="prof_name">{{group_name}}</h1>
+		<p class="prof_status">{{group_description}}</p>
+		{% if admin_status == "True" %}
+		<div class="tab">
+			<a href="#" id="edit">Edit Group</a>
+			<a href="{% url 'removeallmembers' group_id %}">Remove All</a>
+			<a href="{% url 'deletegroup' group_id %}">Delete Group</a>
+		</div>
+		{% endif %}
+		<div class="members_title">
+			<h1>Members: </h1>
+			<h5>ppl ({{number_of_members}})</h5>
+		</div>
+		{% for prof in list_of_members %}
+		<div class="note">
+			{% if prof.member_picture == "none" %}
+			<img src="{% static './img/new_person.png' %}">
+			{% else %}
+			<img src={{prof.member_picture}}>
+			{% endif %}
+			<h3>{{prof.member_name|truncatewords:2}}</h3>
+			<span>
+				{% if admin_status == "True" %}
+					{% if user_id != prof.member_id %}
+					<a href="{% url 'removemember' prof.member_id%}">Remove</a>
+						{% if user_id != prof.member_id %}
+						<a href="{% url 'viewprofile' prof.member_id%}">View</a>
+						{% endif %}
+					{% endif %}
+					{% if user_id == prof.member_id %}
+						<a href="{% url 'viewprofile' prof.member_id%}" class="your_profile">Your Profile</a>
+					{% endif %}
+				{% else %}
+				<a href="{% url 'viewprofile' prof.member_id%}">View Profile</a>
+				{% endif %}
+			</span>
+		</div>
+		{% endfor %}
+	</section>
+	<section class="edit_form" id="xmain">
+		<form action="/changegroupinfo" method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			<span class="edit_form_title">
+			<h1>Edit Group Info!</h1>
+			<a id="xedit"><img src="{% static './img/x-octagon.svg' %}"></a>
+			</span>
+			<input type="text" name="group_name" required placeholder=" Rename Group: ">
+			<textarea name="group_description" required placeholder="Enter Group description: "></textarea>
+			<label for="inputTag" class="labelone">
+				Select Picture <br/>
+				<img src="{% static './img/photo-camera.png' %}" class="imageage">
+				<input id="inputTag" class="inputone" required name="file" type="file" accept="image/*"/>
+				<br/>
+				<h4 id="imageName"></h4>
+			</label>
+			<button type="submit">Edit</button>
+		</form>
+	</section>
+	<section class="sidebar" id="sidebar">
+		<div class="navigation">
+			<div>
+				<h3>Navigations</h3>
+				<p>Explore this new world now!</p>
+			</div>
+			<div class="movoro">
+				<a href="/home"><img src="{% static './img/person-circle.svg' %}">Profile</a>
+				<a href="/book"><img src="{% static './img/house-fill.svg' %}">Library</a>
+				<a href="/chats"><img src="{% static './img/chat-dots.svg' %}">Chats</a>
+				<a href="/groups"><img src="{% static './img/house-fill.svg' %}">Groups</a>
+				<a href="/peers"><img src="{% static './img/plus-circle.svg' %}"> Peers</a>
+				<a href="/findpeers"><img src="{% static './img/person-plus-fill.svg' %}"> Find Peers</a>
+			</div>
+		</div>
+		<div class="banner">
+
+		</div>
+	</section>
+	<script>
+			let input = document.getElementById("inputTag");
+	        let imageName = document.getElementById("imageName")
+
+	        input.addEventListener("change", ()=>{
+	            let inputImage = document.querySelector("input[type=file]").files[0];
+				imageName.innerText = inputImage.name;
+				});
+
+			var edit = document.getElementById("edit");
+			var sidebar = document.getElementById("sidebar");
+			var main = document.getElementById("main");
+			var xmain = document.getElementById("xmain");
+
+			edit.addEventListener("click", function(event){
+				xmain.style = "display: flex;"
+				main.style = "position: fixed; opacity: 0.40; z-index: 1;"
+				sidebar.style = "position: fixed; opacity: 0.70; z-index: 1;"
+			});
+
+			var xedit = document.getElementById("xedit");
+
+			xedit.addEventListener("click", function(event){
+				xmain.style = "display: none;"
+				main.style = "display: flex; flex-direction: column;"
+				sidebar.style = "display: flex; flex-direction: column;"
+			});
+	</script>
+</body>
+</html>
